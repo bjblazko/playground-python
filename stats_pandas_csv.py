@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+from matplotlib.ticker import FormatStrFormatter
 
 pd.options.display.max_rows = 9
 
@@ -33,11 +34,23 @@ def print_averages(data):
     print('\n\n')
 
 
-def plot(data):
-    data.plot(kind='bar')
+def get_count_by_age(data):
+    return data.groupby(['Age'])['Age'].count()
 
+
+def plot_number_of_participants_by_age(data):
+    fig, ax = plt.subplots()
+    ax.set_title('Number of participants by age')
+    ax.locator_params(axis='y', integer=True)
+
+    data.groupby(['Age'])['Age'].count().plot(kind='bar')
+    plt.show()
+
+
+#
+# Script starts here...
+#
 df = get_csv_data('./data.csv')
 print_sorted_by_age_and_height(df)
 print_averages(df)
-#plot(df)
-
+plot_number_of_participants_by_age(df)
