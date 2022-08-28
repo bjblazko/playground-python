@@ -7,7 +7,7 @@ pd.options.display.max_rows = 9
 
 tline = '===================================='
 
-# Reats CSV data from specified file
+# Reads CSV data from specified file
 # and trims up column names off whitespace.
 def get_csv_data(filename):
     data_frame = pd.read_csv(filename, sep=';')
