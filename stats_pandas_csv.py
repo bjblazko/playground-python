@@ -37,12 +37,16 @@ def get_count_by_age(data):
     return data.groupby(['Age'])['Age'].count()
 
 
-def plot_number_of_participants_by_age(data):
+def plot_number_of_participants_by_age(data, horizontal=True):
     fig, ax = plt.subplots()
     ax.set_title('Number of participants by age')
     ax.locator_params(axis='y', integer=True)
 
-    data.groupby(['Age'])['Age'].count().plot(kind='bar')
+    bar_type = 'barh' # horizontal bars
+    if (horizontal==False):
+        bar_type = 'bar'
+
+    data.groupby(['Age'])['Age'].count().plot(kind=bar_type)
     plt.show()
 
 
@@ -52,4 +56,4 @@ def plot_number_of_participants_by_age(data):
 df = get_csv_data('./data.csv')
 print_sorted_by_age_and_height(df)
 print_averages(df)
-plot_number_of_participants_by_age(df)
+plot_number_of_participants_by_age(df, horizontal=True)
